@@ -142,6 +142,20 @@ It takes more than 1h to run all benchmarks, hence they are turned off by defaul
 ```
 mvn test -P Benchmarks
 ```
+
+On Debian-based Linux distributions you can use `update-alternatives` to switch system-wide BLAS implementation:
+
+```bash
+sudo update-alternatives --set libblas.so.3 /usr/lib/libblas/libblas.so.3
+mvn test -P Benchmarks | tee -a benchmarks/gemv_blas
+
+sudo update-alternatives --set libblas.so.3 /usr/lib/atlas-base/atlas/libblas.so.3
+mvn test -P Benchmarks | tee -a benchmarks/gemv_atlas
+
+sudo update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3
+mvn test -P Benchmarks | tee -a benchmarks/gemv_openblas
+```
+
 ## installation
 
 Releases are distributed on Maven central:

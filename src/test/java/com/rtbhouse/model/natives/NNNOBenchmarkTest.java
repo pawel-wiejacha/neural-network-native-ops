@@ -4,6 +4,7 @@ import static com.rtbhouse.model.natives.NeuralNetworkNativeOpsTest.MAX_ERROR;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.ChainedOptionsBuilder;
@@ -23,9 +24,9 @@ public class NNNOBenchmarkTest {
 
     private ChainedOptionsBuilder benchmarkGenericOptions = new OptionsBuilder()
             .warmupTime(TimeValue.seconds(1))
-            .warmupIterations(3)
+            .warmupIterations(5)
             .measurementTime(TimeValue.seconds(1))
-            .measurementIterations(5)
+            .measurementIterations(15)
             .threads(1)
             .forks(1)
             .shouldFailOnError(true)
@@ -49,6 +50,7 @@ public class NNNOBenchmarkTest {
 
     @Test
     @Category(Benchmark.class)
+    @Ignore
     public void allBenchmarksFor300x150() throws Exception {
         Options opts = benchmarkGenericOptions
                 .param("inputSize", "300")
@@ -60,6 +62,7 @@ public class NNNOBenchmarkTest {
 
     @Test
     @Category(Benchmark.class)
+    @Ignore
     public void nativeVsPureJavaGemvBenchmark() throws Exception {
         Options opts = benchmarkGenericOptions
                 .include("nativeDirectGemv")
@@ -69,9 +72,22 @@ public class NNNOBenchmarkTest {
         new Runner(opts).run();
     }
 
+    @Test
+    @Category(Benchmark.class)
+    public void gemvBenchmark() throws Exception {
+        Options opts = benchmarkGenericOptions
+                .include("nativeDirectGemv")
+                .include("netlibJavaGemv")
+                .include("pureJavaGemv")
+                .build();
+
+        new Runner(opts).run();
+    }
+
 
     @Test
     @Category(Benchmark.class)
+    @Ignore
     public void nativeVsNetlibJavaGemvBenchmark() throws Exception {
         Options opts = benchmarkGenericOptions
                 .include("nativeDirectGemv")
@@ -83,6 +99,7 @@ public class NNNOBenchmarkTest {
 
     @Test
     @Category(Benchmark.class)
+    @Ignore
     public void nativeVsPureJavaLinearForwardBenchmarks() throws Exception {
         Options opts = benchmarkGenericOptions
                 .include("nativeDirectLinearForward")

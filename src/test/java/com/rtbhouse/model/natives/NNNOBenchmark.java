@@ -20,10 +20,8 @@ public class NNNOBenchmark {
     static final BLAS INSTANCE = NativeSystemBLAS.getInstance();
 
     // uncomment this to run tests for all this presets
-    @Param({ "1", "10", "20", "50", "100", "200", "500", "1000", "2000" })
-    private int inputSize;
-    @Param({ "1", "10", "20", "50", "100", "200", "500", "1000", "2000" })
-    private int outputSize;
+    @Param({ "5", "10", "20", "50", "60", "70", "100", "1000" })
+    private int matrixSize;
 
     private FloatBuffer directMatrix;
     private FloatBuffer directInput;
@@ -39,6 +37,9 @@ public class NNNOBenchmark {
 
     @Setup
     public void init() throws Exception {
+        int inputSize = matrixSize;
+        int outputSize = matrixSize;
+
         directMatrix = allocateDirectFloatBufferOf(inputSize * outputSize);
         directInput = allocateDirectFloatBufferOf(inputSize);
         directOutput = allocateDirectFloatBufferOf(outputSize);
