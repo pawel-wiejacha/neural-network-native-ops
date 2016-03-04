@@ -1,2 +1,3 @@
 *.iml
 target
+src/main/resources/com/rtbhouse/model/natives/*.so

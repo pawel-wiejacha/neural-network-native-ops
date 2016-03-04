@@ -19,16 +19,8 @@ We supply a Maven artifact precompiled for Linux and sandybridge 64-bit processo
 with the `SSE` and `AVX` instruction set on, but without `AVX2`.
 
 To run on another processor / architecture one needs to follow the steps below:
- 1. Get [OpenBLAS](https://github.com/xianyi/OpenBLAS)
- 2. Compile it
-
-    `make`
-
-    (or `make USE_THREAD=0` if you don't want multithreading)
- 3. and install **precisely** like this
-
-    `make PREFIX=~/OpenBLASlib install`
- 4. Finally go to neural-network-native-ops dir and
+ 1. Make sure [OpenBLAS](https://github.com/xianyi/OpenBLAS) is installed on your system
+ 2. Go to neural-network-native-ops dir and
 
     `mvn clean compile exec:exec install`
 

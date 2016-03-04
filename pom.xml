@@ -128,8 +128,7 @@
                                 <argument>-jar</argument> <argument>${org.bytedeco:javacpp:jar}</argument>
                                 <argument>-classpath</argument> <argument>${project.build.outputDirectory}</argument>
                                 <argument>-d</argument> <argument>${project.build.sourceDirectory}/../resources/com/rtbhouse/model/natives/</argument>
-                                <argument>-Xcompiler</argument> <argument>-I${user.home}/OpenBLASlib/include/</argument>
-                                <argument>-Xcompiler</argument> <argument>${user.home}/OpenBLASlib/lib/libopenblas.a</argument>
+                                <argument>-Xcompiler</argument> <argument>-lblas</argument>
                             </arguments>
                         </configuration>
                     </execution>
