@@ -75,7 +75,8 @@ NNNOBenchmark.pureJavaGemv              1000  thrpt   15      1112.551 ±      7
 
 ### ATLAS vs OpenBLAS
 
-![ATLAS vs OpenBLAS](atlas_vs_openblas.png)
+![ATLAS vs OpenBLAS](atlas_vs_openblas_linear_scale.png)
+![ATLAS vs OpenBLAS](atlas_vs_openblas_log_scale.png)
 
 ### Netlib vs NNO vs pure Java SGEMV
 
@@ -85,9 +86,11 @@ NNNOBenchmark.pureJavaGemv              1000  thrpt   15      1112.551 ±      7
 ## Summary
 
 * For matrices with size smaller than 70, ATLAS outperforms OpenBLAS.
+	* For larger matrices (i.e. with size larger than 70) the situation is opposite - OpenBLAS is much faster
 * For matrices with size smaller than 20, pure Java implementation outperforms ATLAS
 * For matrices with size smaller than 50, pure Java implementation outperforms OpenBLAS
 * NNNO is slightly faster than netlib-java. Especially when `GC_locker::lock_critical()` overhead is important (e.g. matrix size smaller than 50).
 	* Therefore, direct float buffers used by NNNO seems to be faster than `GetPrimitiveArrayCritical()` used by netlib-java.
+
 
 
