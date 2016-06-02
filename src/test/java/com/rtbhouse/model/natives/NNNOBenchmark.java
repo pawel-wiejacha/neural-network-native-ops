@@ -1,5 +1,7 @@
 package com.rtbhouse.model.natives;
 
+import static com.rtbhouse.model.natives.NeuralNetworkNativeOps.NO_TRANSPOSE;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -20,9 +22,9 @@ public class NNNOBenchmark {
     static final BLAS INSTANCE = NativeSystemBLAS.getInstance();
 
     // uncomment this to run tests for all this presets
-    @Param({ "1", "10", "20", "50", "100", "200", "500", "1000", "2000" })
+    @Param({"1", "10", "20", "50", "100", "200", "500", "1000", "2000"})
     private int inputSize;
-    @Param({ "1", "10", "20", "50", "100", "200", "500", "1000", "2000" })
+    @Param({"1", "10", "20", "50", "100", "200", "500", "1000", "2000"})
     private int outputSize;
 
     private FloatBuffer directMatrix;
@@ -99,13 +101,13 @@ public class NNNOBenchmark {
     @Benchmark
     public void nativeDirectLinearForward() {
         // second parameter simulates biases
-        NeuralNetworkNativeOps.linearForward(directMatrix, directOutput, directInput, directOutput);
+        NeuralNetworkNativeOps.linearForward(NO_TRANSPOSE, directMatrix, directOutput, directInput, directOutput);
     }
 
     @Benchmark
     public void nativeHeapLinearForward() {
         // second parameter simulates biases
-        NeuralNetworkNativeOps.linearForward(heapMatrix, heapOutput, heapInput, heapOutput);
+        NeuralNetworkNativeOps.linearForward(NO_TRANSPOSE, heapMatrix, heapOutput, heapInput, heapOutput);
     }
 
     @Benchmark
